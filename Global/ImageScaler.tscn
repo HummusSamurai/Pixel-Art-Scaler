@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://Global/ImageScaler.gd" type="Script" id=1]
+[ext_resource path="res://DEMO/Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Global/bilinear_scaler.tres" type="Shader" id=3]
+[ext_resource path="res://Global/p.tex" type="Texture" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+shader/shader = ExtResource( 3 )
+shader/shading_mode = 0
+shader_param/Zoom = 0.5
+shader_param/Screen_Size = Vector2( 1, 1 )
+
+[node name="ImageScaler" type="Node"]
+
+script/script = ExtResource( 1 )
+resolution = Vector2( 250, 200 )
+stretch_mode = 0
+scaling_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+[node name="ViewportSprite" type="ViewportSprite" parent="."]
+
+viewport = NodePath("../Viewport")
+
+[node name="Viewport" type="Viewport" parent="."]
+
+editor/display_folded = true
+rect = Rect2( 0, 0, 0, 0 )
+own_world = false
+world = null
+transparent_bg = false
+render_target/enabled = true
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="Game" parent="Viewport" instance=ExtResource( 2 )]
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+
+editor/display_folded = true
+copy_mode = 0
+rect = Rect2( -100, -100, 200, 200 )
+
+[node name="TextureFrame" type="TextureFrame" parent="BackBufferCopy"]
+
+material/material = SubResource( 1 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+
+
