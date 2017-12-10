@@ -8,7 +8,7 @@ onready var textureFrameMat = textureFrame.get_material()
 
 export (Vector2) var resolution
 export(int, "keep", "keep-width", "keep-height", "expand") var stretch_mode = 0
-export(int, "interger", "fill", "nearest-neighbour") var scaling_mode = 0
+export(int, "interger", "interger-bilinear", "nearest-neighbour") var scaling_mode = 0
 
 var current_scene = null
 
@@ -39,7 +39,7 @@ func update_view():
 		
 		textureFrame.hide()
 
-	elif scaling_mode == 1: # Fill (interger + bilinear) scaling mode
+	elif scaling_mode == 1: # Interger-Bilinear scaling mode
 		var sprite_scale = min(floor(window_size.x / resolution.x),floor(window_size.y / resolution.y))
 		viewSprite.set_scale(Vector2(sprite_scale,sprite_scale))
 		

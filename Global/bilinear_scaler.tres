@@ -3,7 +3,9 @@
 [resource]
 
 _code = {
-"fragment": "uniform float Zoom = 0.5;
+"fragment": "// Shader based on: https://stackoverflow.com/questions/39379582/what-is-this-technique-if-not-bilinear-filtering
+
+uniform float Zoom = 0.5;
 uniform vec2 Screen_Size = vec2(1,1);
 
 vec2 GlobalToLocal (vec2 u) {
